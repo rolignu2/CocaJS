@@ -111,5 +111,14 @@
     var error     = function(xhr){};
     coca.Ajax(null , "http://holamundo.com/" , { param : "Holiss" } , wait , success , error);
     
+    //Metamosle paja 
+    
+    coca.prepare()
+    		.dataType()
+		.contentType('algun content type')
+		.json();
+
+     coca.$$(object);	
+	
    
  ```
