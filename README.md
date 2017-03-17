@@ -18,7 +18,7 @@
 
   Vamos bien.
   
-  ## Usando la pokeclass para un solo pokemon o de uso simple 
+  ## Usando Coca cuando el documento este listo 
 ### VanillaJS
 ```js
 
@@ -42,3 +42,76 @@
     
   
 ```
+
+   ## Coca Asincrona (Goobye $.ajax )
+   
+      ##Coca genera una peticion asincrona mucho mas rapida gracias a vanillaJS 
+     
+``` Cuando se diseño coca async se penso en muchas formas de llamarlo o de utilizarlo ```
+``` Coca async tiene como parametros definidos un objeto , funcion o parametros estandares ```
+      
+      Si coca se trabaja con parametros definidos por un objeto ten encuenta estos datos 
+     
+ ```js
+         {
+            url   : "La url obvio",
+            data  : {}, //objeto datos parametros a la url 
+            succces : function(xhr){}, //optional
+            wait : function(){},       //opcional
+            error : function(xhr){},   //opcional
+         }
+  ```
+      
+ ```js
+    
+     /**
+        Continuando con la variable "coca" aprenderemos como 
+        hacer un apeticion asincrona (AJAX) de multiples formas 
+     **/
+     
+     //Primera forma 
+     // $$ --> metodo  |  {  url : "" , data : "" } --> parametros 
+     
+     coca.$$(function(){
+	
+        //una funcion que haga algo antes de enviar la peticion 
+	        
+	      return {
+		        url 		: "https://httpbin.org/get",
+		        data 		: {
+			          format : "json"
+		        }
+	     };
+	
+    }).success(function(response){
+	        console.log(response);
+    });
+    
+    
+   var object =  {
+            url   : "La url obvio",
+            data  : {}, //objeto datos parametros a la url 
+            succces : function(xhr){}, //optional
+            wait : function(){},       //opcional
+            error : function(xhr){},   //opcional
+     }
+    
+    //otra forma de llamar a la coca async
+    coca.ajax(object);
+    
+    //Andas de fino y buena ortografia , tranquilo aca tenemos la solucion 
+    coca.Ajax(object);
+    
+    //La pereza gana tranquilo como un ejemplo anterior 
+    coca.$$(object);
+    
+    //Soy super programador senio amante de angularJS , tranquilo aca tenemos tu async 
+    var wait      = function() {};
+    var success   = function(xhr) {};
+    var error     = function(xhr)
+    coca.Ajax(null , 'http://holamundo.com/' , { param : "Holiss" } , wait , success , error);
+    
+    
+
+    
+ ```
