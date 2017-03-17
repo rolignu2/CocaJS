@@ -105,11 +105,11 @@
     //La pereza gana tranquilo como un ejemplo anterior 
     coca.$$(object);
     
-    //Soy super programador senio amante de angularJS , tranquilo aca tenemos tu async 
+    //Soy super programador senior amante de angularJS , tranquilo aca tenemos tu async 
     var wait      = function() {};
     var success   = function(xhr) {};
     var error     = function(xhr)
-    coca.Ajax(null , 'http://holamundo.com/' , { param : "Holiss" } , wait , success , error);
+    coca.Ajax(null , "http://holamundo.com/" , { param : "Holiss" } , wait , success , error);
     
     
 
