@@ -100,7 +100,7 @@
     coca.ajax(object);
     
     //Andas de fino y buena ortografia , tranquilo aca tenemos la solucion 
-    coca.Ajax(object);
+    Coca.Ajax(object);
     
     //La pereza gana tranquilo como un ejemplo anterior 
     coca.$$(object);
