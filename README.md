@@ -2,7 +2,7 @@
 
   Version 0.1.2 (Alpha)
 
-``` Escrita con VanillaJS CocaJS pretende ser mas rapida que JQUERY pero no pretende destronarla como el mejor Framework o el mas usado ``` : i'm in love with the coco
+``` Escrita con VanillaJS; CocaJS pretende ser mas rapida que JQUERY pero no pretende destronarla como el mejor Framework o el mas usado ``` : i'm in love with the coco
 
 ## Como se usa : 
   
@@ -180,8 +180,9 @@
       coca.prepend("ESTE VA MAS  ARRIBA <BR>");
       
      
-      
-      
-      
-   
  ```
+ 
+  CocaJS tiene mas manipulaciones del DOM, estas funciones son llamadas por el mismo coca.funcion ..
+  
+  	coca.each() 
+	
