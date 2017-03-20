@@ -1,6 +1,6 @@
 # CocaJS
 
-  Version 0.1.0 (Alpha)
+  Version 0.1.2 (Alpha)
 
 ``` Escrita con VanillaJS CocaJS pretende ser mas rapida que JQUERY pero no pretende destronarla como el mejor Framework o el mas usado ``` : i'm in love with the coco
 
@@ -168,6 +168,20 @@
 		});
       
       });
-   	
+      
+      
+      /***HAGAMOS APPENDS Y PREPEND  PERO ANTES UN HTML ***/
+      
+      coca.query("#meta_test").html("con la coca uno es mas feliz ... ")
+      coca.append("<BR> coca A");
+      coca.append("<BR> coca A");
+      coca.append("<BR> coca A");
+      coca.prepend("ESTE VA ARRIBA <BR>");
+      coca.prepend("ESTE VA MAS  ARRIBA <BR>");
+      
+     
+      
+      
+      
    
  ```
