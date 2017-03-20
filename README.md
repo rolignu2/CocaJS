@@ -204,8 +204,7 @@
    
    	En cocaJS existe una manera de evitar la resolucion de ambito "." o mejor conocido como coca.[funcion]
 	
-   
-    ```js
+```js
     
     	/**
 	    la forma definida de cocaJS (la vieja confiable)
@@ -215,8 +214,7 @@
 	 $C("div") ; // su equivalente 
 	 $("div") ; // si no tenes JQUERY podes usar su prefijo.. [no es tan confiable]
 	 
-    
-    ```
+ ```
     
        en conclusion $C("elemento o query") instancia una cocajs hija la cual coca.[] seria la padre.
 	
