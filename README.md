@@ -24,7 +24,7 @@
 
     /*
       Coca se instancia sola con los nombres de variables 
-      "coca" , "Coca" o "$" si no existe jquery instanciado
+      "coca" , "Coca"  o $C()
       
       Digamos que existe JQUERY ... utilizaremos "coca"
       
