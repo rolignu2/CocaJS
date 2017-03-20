@@ -18,13 +18,18 @@
 
 <body>
 
-   <div>
-		<p>HOLA MUNDO DESDE POR AHI </p>
+
+    <div>
+		<p> Algun texto sin sentido ....</p>
    </div>
    
-      <div>
-		<p>PRUEBA ALFA ECO CHARLIE </p>
+   <div style="font-size:1.5em;background:red;" id="meta_test">
    </div>
+   
+   <div>
+		ALGUN TEXTO POR AQUI
+   </div>
+   <input type="hidden" id="test_" value="soy un valor escondido :) " />
 
 </body>
 
@@ -32,14 +37,14 @@
 <script>
 
 	coca.ready(()=>{
-		console.log("LA COCA ESTA LISTA");
+		//console.log("LA COCA ESTA LISTA");
 		
 		
-		coca.prepare()
+	/*	coca.prepare()
 			.dataType()
-			.json();
+			.json();*/
 			
-	coca.$$(function(){
+	/*coca.$$(function(){
 	
 		return {
 			url 		: "https://httpbin.org/get",
@@ -54,7 +59,50 @@
 	
 	}).success(function(response){
 		console.log(response);
+	});*/
+	
+	
+	/*coca.query("div").each( function(a,b){
+		 console.log(b);
+	});*/
+	
+	/*console.log(coca.query("#meta_test").html("CAPA 8 ERROR DE DATOS USUARIO"));
+	coca.append("<BR> PRUEBA ALFA BETHA");
+	coca.append("<BR> PRUEBA ALFA BETHA");
+	coca.append("<BR> PRUEBA ALFA BETHA");
+	coca.prepend("ESTE VA ARRIBA <BR>");
+	coca.prepend("ESTE VA MAS  ARRIBA <BR>");
+	console.log(coca.getId());
+	console.log(coca.getName());*/
+	//coca.query("#test_").html(1);
+	
+	
+	 
+	/*coca.query("div").each( function(a,b){
+	
+		  $C(b).html("Prueba X,Y,Z");
+		  if($C(b).getId() === 'meta_test')
+		  {
+			 console.log("prueba css");
+			 //$C(b).setCss("background" , "yellow");
+			 $C(b).css({
+				 "background" : "blue",
+				 "color"	  : "white !important",
+				 "font-size"  : "2em",
+				 "border"     : "6px solid red "
+ 			 });
+		  }
+		  
+		  
+	});*/
+	
+	
+	
+	$C("div").each(function(a,b){
+		 $C(b).html("Prueba , binaria ");
 	});
+	
+	
 		
 });
 
