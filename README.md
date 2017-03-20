@@ -200,3 +200,23 @@
 	coca.removeAttr(string) //elimina un atributo 
 	coca.query(string) // query en cual se ejecuta en el dom 
 	
+   ## CocaJS y su instancia 
+   
+   	En cocaJS existe una manera de evitar la resolucion de ambito "." o mejor conocido como coca.[funcion]
+	
+   
+    ```js
+    
+    	/**
+	    la forma definida de cocaJS (la vieja confiable)
+	**/
+	 
+	 coca.query("div") ; // normalmente asi trabajariamos 
+	 $C("div") ; // su equivalente 
+	 $("div") ; // si no tenes JQUERY podes usar su prefijo.. [no es tan confiable]
+	 
+    
+    ```
+    
+       en conclusion $C("elemento o query") instancia una cocajs hija la cual coca.[] seria la padre.
+	
