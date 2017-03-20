@@ -214,7 +214,12 @@
 	 $C("div") ; // su equivalente 
 	 $("div") ; // si no tenes JQUERY podes usar su prefijo.. [no es tan confiable]
 	 
+	 //Un ejemplo de la manipulacion DOM 
+	 
+	 let a =  $C(".mi_clase").css({ background : "red" }).append("el fondo cambio ").html();
+	 console.log(a); 
+	 
  ```
     
-       en conclusion $C("elemento o query") instancia una cocajs hija la cual coca.[] seria la padre.
+       En conclusion $C("elemento o query") instancia una cocajs hija la cual coca.[] seria la padre.
 	
