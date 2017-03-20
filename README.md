@@ -153,19 +153,19 @@
 	     y le haremos cambios de css ... mamado va
 	 **/
       
-         coca.query("div").each( function(a,b){
+         	coca.query("div").each( function(a,b){
 	
-		  $C(b).html("Prueba X,Y,Z");
-		  if($C(b).getId() === 'meta_test')
-		  {
-			 $C(b).css({
-				 "background" : "blue",
-				 "color"	  : "white !important",
-				 "font-size"  : "2em",
-				 "border"     : "6px solid red "
- 			 });
-		  }  
-	});
+		  	$C(b).html("Prueba X,Y,Z");
+		 	 if($C(b).getId() === 'meta_test')
+		 	 {
+				 $C(b).css({
+					 "background" : "blue",
+					 "color"	  : "white !important",
+					 "font-size"  : "2em",
+					 "border"     : "6px solid red "
+ 			 	});
+		 	  }  
+		});
       
       });
    	
