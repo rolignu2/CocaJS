@@ -184,5 +184,19 @@
  
   CocaJS tiene mas manipulaciones del DOM, estas funciones son llamadas por el mismo coca.funcion ..
   
-  	coca.each() 
+  	coca.each( Array , function(){} )   o  coca.each( function(){} ) //si existe un elemento apuntando
+	coca.node(elemento o nodo )  equivalente  coca.$(elemento o nodo )  
+	coca.html( string / html ) 
+	coca.setVal(String)
+	coca.append(string/html)
+	coca.prepend(string/html)
+	coca.result() // devuelve un array de los nodos afctados por coca.query ...
+	coca.css( {}  ) // objecto o coca.css(string ,string)
+	coca.setCss(string , string)
+	coca.getId() // obtiene el id del elemento
+	coca.getName() //obtiene el nombre del elemento 
+	coca.setAttr(string , string ) //establece un nuevo atributo 
+	coca.getAttr(string) //obitiene un atributo
+	coca.removeAttr(string) //elimina un atributo 
+	coca.query(string) // query en cual se ejecuta en el dom 
 	
