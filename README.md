@@ -122,3 +122,52 @@
 	
    
  ```
+ 
+  ## CocaJS manipulacion del DOM 
+  
+    La manipulacion se hace casi que igual a jquery solo que este es mas rapido.
+    Tenemos este ejemplo : 
+    
+ ```html
+   
+   	<body>
+	
+		<div>
+ 		<p> Algun texto sin sentido ....</p>
+		</div>
+   
+		<div style="font-size:1.5em;background:red;" id="meta_test"></div>
+		<input type="hidden" id="test_" value="soy un valor escondido :) " />
+
+	</body>
+ ```
+  
+ ```js
+   
+      coca.ready(()=>{
+      
+         /**
+	     vamos a buscar todos los divs , 
+	     a esos divs le cambiaremos el html por Prueba X,Y,Z 
+	     de ahi buscaremos el div con el id "meta_test"
+	     y le haremos cambios de css ... mamado va
+	 **/
+      
+         coca.query("div").each( function(a,b){
+	
+		  $C(b).html("Prueba X,Y,Z");
+		  if($C(b).getId() === 'meta_test')
+		  {
+			 $C(b).css({
+				 "background" : "blue",
+				 "color"	  : "white !important",
+				 "font-size"  : "2em",
+				 "border"     : "6px solid red "
+ 			 });
+		  }  
+	});
+      
+      });
+   	
+   
+ ```
