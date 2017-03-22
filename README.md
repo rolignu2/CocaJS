@@ -59,7 +59,7 @@
   
 ```
 
-   ## Coca Asincrona (Goobye $.ajax )
+   ## Coca Asincrona (Salú  jquery ajax  )
    
       ##Coca genera una peticion asincrona mucho mas rapida gracias a vanillaJS 
      
