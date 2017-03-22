@@ -37,6 +37,15 @@
     $C("div").each( (a,b)=>{ console.log( "key="  a + " value=" + b ) } )
     
     
+    /***  OJO !! si JQUERY no existe o no esta definido podemos usar  "$" como instancia  ***/
+    
+    
+    $(document).ready( ()=> { console.log("Coca esta listo");  }  );
+    
+    $("div").each( (a,b)=>{ console.log( "key="  a + " value=" + b ) } )
+    
+    
+    
     //igual pero mas rapido que $(document).ready(function(){});
     
     coca.ready(() => {
