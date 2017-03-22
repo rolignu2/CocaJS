@@ -1,6 +1,8 @@
 # CocaJS
 
   Version 0.1.2 (Alpha)
+  
+  [![Build Status](https://secure.travis-ci.org/mde/timezone-js.png)](https://secure.travis-ci.org/mde/timezone-js)
 
 ``` Escrita con VanillaJS; CocaJS pretende ser mas rapida que JQUERY pero no pretende destronarla como el mejor Framework o el mas usado ``` : i'm in love with the coco
 
