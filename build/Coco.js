@@ -1,22 +1,22 @@
-class Coco extends CocaAsync
+class Coco extends  CocaEvents
 {
 	constructor(){
 		super();
 		this.query_ 		= "";
 		this.query_result	= null;
+		this.childs_result  = null ;
+		
 	}
 	
 	query($query){return this._cmquery($query) ;}
 	
 	Query($query){return this._cmquery($query);}
 	
+	$($node ){ return this.node($node);}
+	
 	node( $node){
 		this.query_result = Array($node);
 		return this;
-	}
-	
-	$($node ){
-	   return this.node($node);
 	}
 	
 	each ( $array_object = null  , $function   ){
@@ -58,7 +58,88 @@ class Coco extends CocaAsync
 		 return this;
 	}
 	
+	inverseEach($array_object = null  , $function  ){
+		
+		 if(typeof $array_object === 'function'){
+			 $function = $array_object;
+			 $array_object = null ;
+		 }
+				
+		 if(typeof $function !== 'function')
+			 return this;
+		 
+		 let _arr = $array_object ;
+		 if(_arr == null )
+				_arr = this.query_result;
+			
+		
+		 if(		typeof _arr == 'Array' 
+			|| 		typeof _arr == 'array'
+			|| 		typeof _arr == 'object'
+		 ) {
+			
+			 let k = _arr.length;
+			 for(var i = k ; i >= 0  ; i--){
+				 if(typeof _arr[i] == 'function')
+					  continue;
+				  
+				
+				  if(typeof _arr[i] == 'number' && i === 'length' ) 
+					  continue;
+				  
+					 
+				  $function( i , _arr[i] );
+			 }
+		 }
+		 
+		 return this;
+	}
 	
+	
+	arrayMap($object , $function){
+		var $map = new Map($object);
+		for (var [key, value] of $map) {
+				$function( key  , value );
+		}
+		
+		return this;
+	}
+	
+	
+	children( $element ){
+		this.childs_result = this.result()[0].querySelectorAll($element);
+		return this;
+	}
+	
+	
+	all_childs( $function ){
+		
+		let __k = Array();
+		if(typeof ($function) !== 'function'){
+			
+			this.each(this.childs_result , (a,b)=>{
+				__k.push(b);
+			});
+		
+			return __k;
+		}
+		else {
+			this.each(this.childs_result , (a,b)=>{
+					$function(a,b);
+			});
+		}
+		
+		return this;
+	}
+	
+	
+	myChild( $index ){
+		 try{
+			return this.childs_result[$index] ;
+		 }catch(e){
+			 return null ;
+		 }
+	}
 	
 	
 	html ($val = 'undefined' )
@@ -92,6 +173,7 @@ class Coco extends CocaAsync
 		return this.query_result[0];
 	
 	}
+	
 	
 	getVal(){
 		return this.html();
@@ -137,7 +219,6 @@ class Coco extends CocaAsync
 		 return this;
 	}
 	
-	
 	result(){
 		return this.query_result;
 	}
@@ -162,7 +243,6 @@ class Coco extends CocaAsync
 	
 	setCss( $name , $val   ){
 		
-	
 		 if(typeof ($name) == 'object' )
 			  return this.css($name);
 		 
@@ -221,28 +301,75 @@ class Coco extends CocaAsync
 		return this.query_result[0].getAttribute("name");
 	}
 	
+	exist(){
+		let __q = this.query_result;
+		if(__q.length === 0 ) return false;
+		else return true ;
+	}
+	
 	getAttr($name ){
-		return this.query_result[0].getAttribute($name);
+		try{
+			return this.query_result[0].getAttribute($name);
+		}catch(e){
+			this._error_control("CRITICAL" ,e);
+			return this;
+		}
 	}
 	
 	
 	setAttr($name , $val )
 	{
-		this.query_result[0].setAttribute($name , $val);
+		try{
+			this.query_result[0].setAttribute($name , $val);
+		}catch(e){
+			this._error_control("CRITICAL" ,e);
+		}
+		
 		return this;
 	}
 	
+	
+	attr( $name , $val = null )
+	{
+		if(typeof ($name) == 'string')
+			return this.setAttr($name , $val );
+		
+		if(typeof ($name) !== 'object')
+			return this;
+		
+		for( let i in $name  ){
+			this.setAttr( i , $name[i] );
+		}
+		
+		return this;
+		
+	}
+	
+
+	existAttr( $name  )
+	{
+		let __a = this.getAttr($name);
+		if( __a == '' || __a == 'undefined' || __a == null  )
+			return false;
+		else 
+			return true;
+	}
+	
+
 	removeAttr($name)
 	{
 		this.query_result[0].removeAttribute($name);
 		return this;
 	}
 	
+
 	_cmquery($query ){
 		 this.query_ = $query ;
 		 this.query_result = document.querySelectorAll($query);
 		 return this;
 	}
+	
+
 	
 }
 

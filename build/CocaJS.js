@@ -1,13 +1,16 @@
-class CocaJS extends Coco{
+class CocaJS extends CocaPlus{
 	
 	constructor(){
 		super();
 		this.errors 			= [];
 		this.o 					= {};
-		this.version			= "0.1.0";
+		this.version			= "0.1.1";
+		this.__test			    = false ;
 	}
 	
 	version() { return this.version ;} 
+	
+	testMode($a = true ){this.__test = $a ;  return this; }
 	
 	extend ()
 	{
@@ -106,4 +109,39 @@ class CocaJS extends Coco{
 	
 	
 	
+	Errors($index){
+		if(typeof $index == 'undefined')
+			return this.errors;
+		else 
+			return this.errors[$index];
+	}
+
+	
+	_error_control( type , err ){
+		
+		  if(typeof err.message != 'undefined'){
+			   this.errors.push({
+					message : err.message ,
+					type    : type ,
+					file    : err.fileName,
+					stack   : err.stack 
+				});
+		  }
+		  else if (typeof err == 'string'){
+			   this.errors.push({
+					message : err ,
+					type    : type ,
+					file    : '...',
+					stack   : '...'
+				});
+		  }
+		
+		 
+		 if(this.__test){
+			 console.log(this.errors[this.errors.length - 1 ]);
+		 }
+		 
+	}
+	
+
 }
