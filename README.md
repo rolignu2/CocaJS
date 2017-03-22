@@ -1,6 +1,6 @@
 # CocaJS
 
-  Version 0.1.2 (Alpha)
+  Version 0.1.1 (Beta)
   
   [![Build Status](https://secure.travis-ci.org/mde/timezone-js.png)](https://secure.travis-ci.org/mde/timezone-js)
 
@@ -11,8 +11,8 @@
   ``` Antes que nada CocaJS se esta desarrollando a pequeños pasos pero solidos asi que carece de muchas funciones Que nos obliga a coexistir con JQUERY ```
   
   
-  Descargate el repositorio y a continuacion "Busca" Coca.js y una vez que guardes ese script 
-  en donde desee tu corazon, mandalo a llamar de esta forma. [OJO ! no esta minificado porque esta en prueba]
+  Descargate el repositorio y a continuacion "Busca" Coca.js o coca.min.js  y una vez que guardes ese script 
+  en donde desee tu corazon, mandalo a llamar de esta forma.
 
 ```
     <script src="../Aguna-ruta/Coca.js" type="text/javascript" ></script>
