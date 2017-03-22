@@ -24,13 +24,18 @@
 ### VanillaJS
 ```js
 
+     
+
     /*
       Coca se instancia sola con los nombres de variables 
       "coca" , "Coca"  o $C()
-      
-      Digamos que existe JQUERY ... utilizaremos "coca"
-      
     */
+    
+    
+    $C(document).ready( ()=> { console.log("Coca esta listo");  }  );
+    
+    $C("div").each( (a,b)=>{ console.log( "key="  a + " value=" + b ) } )
+    
     
     //igual pero mas rapido que $(document).ready(function(){});
     
