@@ -12,6 +12,11 @@ class CocaJS extends CocaPlus{
 	
 	testMode($a = true ){this.__test = $a ;  return this; }
 	
+	setTest(){
+		 this.testMode(true);
+		 return this;
+	}
+	
 	extend ()
 	{
 		
@@ -115,6 +120,13 @@ class CocaJS extends CocaPlus{
 		else 
 			return this.errors[$index];
 	}
+	
+	getError(   console = false ){
+		if(console)
+		   console.log(this.Errors());
+	    else 
+			return this.Errors();
+	}
 
 	
 	_error_control( type , err ){
@@ -139,7 +151,11 @@ class CocaJS extends CocaPlus{
 		 
 		 if(this.__test){
 			 console.log(this.errors[this.errors.length - 1 ]);
+		 }else{
+			 console.log( "You have one or more errors in the stack ( console.log(coca.getError()) to view the error ) [STACK][" + (this.errors.length)  + "]" );
 		 }
+		 
+		 
 		 
 	}
 	

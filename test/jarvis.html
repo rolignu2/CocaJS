@@ -3,11 +3,8 @@
 <html>
 
 <head>
- <script
-  src="https://code.jquery.com/jquery-3.2.0.js"
-  integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ="
-  crossorigin="anonymous"></script>
-
+ 
+<script src="jquery.js"></script>
 <script src="../build/CocaAsync.js" type="text/javascript" ></script>
 <script src="../build/CocaEvents.js" type="text/javascript" ></script>
 <script src="../build/Coco.js" type="text/javascript" ></script>
@@ -21,7 +18,7 @@
 <body>
 
 
-    <div>
+  <!--  <div>
 		<p>Y</p>
 		<p> A</p>
 		<p> B</p>
@@ -31,17 +28,94 @@
    <div style="font-size:1.5em;background:red;" id="meta_test">
    </div>
    
-   <div>
-		ALGUN TEXTO POR AQUI
+   <div class="hola-mundo     como-estas" id="mydiv">
+	ALGUN TEXTO POR AQUI
    </div>
-   <input type="hidden" id="test_" value="soy un valor escondido :) " />
+   <input type="hidden" id="test_" value="soy un valor escondido :) " /> -->
+   
+   
+   <div id="mynode">
+		<p>MENU DE INICIO </p>
+		<div id="title_">
+			<div>
+				<p>A</p>
+			<p>B</p>
+			<p>B</p>
+			<p>C</p>
+			<p>D</p>
+			</div>
+		</div>
+   </div>
 
 </body>
 
 
 <script>
 
+    $(document).ready(function(){
+	
+	   let node = $("#mynode p[id='title_']");
+	
+	});
+
 	coca.ready(()=>{
+	
+	
+	   // console.log( coca.query("mynode").html());
+		//console.log(coca.Errors());
+		
+		coca.setTest();
+		//var r  = coca.query("#mynode").find("p")
+		/*r.all_childs(function(a,b){
+				console.log(b);
+		});*/
+		
+		//console.log(r.myChild(0));
+		
+		//console.log(coca.query(r.getResult(0 , false)));
+		//var c = coca.query("#mynode div[id='title_']").find("div");
+		//console.log(c.result());
+		//console.log(c.result());
+		//var d = coca.query("#mynode");
+		//console.log(d.result());
+		//console.log(c.result("?child1"));
+		
+		//console.log(coca.Q('<div><input type="text" value="hola" /></div>' , "input!"));
+		//console.log(coca.find("input").result());
+		
+		
+		
+		let kk = coca.Q("#title_");
+		kk.find("div");
+		console.log(kk);
+		console.log(kk.result());
+		coca.Q(kk.result())
+		
+		
+		/*kk.Q("#mynode");
+		console.log(kk);
+		console.log("SEGUNDA BUSQUEDA NODAL :");
+		kk.Q("#title_");
+		console.log(kk);*/
+		
+		
+		//console.log(coca.Q('<div><p>QUE TAL </p></div>' , "tag!"));
+		//console.log(c.result("tag!"));*/
+		//console.log( coca.Q("input!").result());
+		
+		//c.result(null , true ).children("p");
+		
+	//	c.result(null, true ).children("p").each(function(k,b){
+			//	console.log(k);
+			//	console.log(b);
+	//	});
+		//console.log(c.result());
+		//console.log(c.html())
+		
+		
+		//console.log(r);
+		
+		
 		//console.log("LA COCA ESTA LISTA");
 		
 		
@@ -113,26 +187,29 @@
 	
 	
 	
-	coca.query("div").children("p").all_childs(( a , b)=>{
+	/*coca.query("div").children("p").all_childs(( a , b)=>{
 	     console.log(b);
 	}).click(function(e){
 		 let t = $C().event(e).toTarget(); //Forma correcta
 		 //let t  = $C().event().toTarget(); //Forma incorrecta
 		 let ee = $C(t).testMode().css({background : 'red'});
 
-	});
+	});*/
+	
+	//let a = $C("#mydiv").existClass('como-estas');
+	//console.log(a);
 	
 	
-	let e = $C("#test_").exist();
-	console.log(e);
+	//let e = $C("#test_").exist();
+	//console.log(e);
 	
 	/*$C().arrayMap( [ [ "hola" , "mundo"]  ] , function(a,b){
 	     console.log(a  +  "--->" + b);
 	});*/
 	
 	
-	let k = $C().testMode().timer.date.create({ "data": "nullable"});
-	console.log(k);
+	//let k = $C().testMode().timer.date.create({ "data": "nullable"});
+	//console.log(k);
 	
 	 
 		

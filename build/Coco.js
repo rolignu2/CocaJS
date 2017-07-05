@@ -2,374 +2,278 @@ class Coco extends  CocaEvents
 {
 	constructor(){
 		super();
-		this.query_ 		= "";
-		this.query_result	= null;
-		this.childs_result  = null ;
-		
+		this.query_ 		= [];
+		this.query_result	= [];
+		this.cindex			= 0 ;
 	}
 	
-	query($query){return this._cmquery($query) ;}
+	query($query , $rename = null ){return this._cmquery($query , $rename);}
 	
-	Query($query){return this._cmquery($query);}
+	Query($query , $rename = null  ){return this._cmquery($query , $rename );}
 	
-	$($node ){ return this.node($node);}
+	Q($query , $rename = null ) {return this._cmquery($query , $rename);} 
 	
-	node( $node){
-		this.query_result = Array($node);
-		return this;
-	}
-	
-	each ( $array_object = null  , $function   ){
+	result( index = null  , pointer = false ){
 		
-		 
-		 if(typeof $array_object === 'function'){
-			 $function = $array_object;
-			 $array_object = null ;
-		 }
-				
-		 if(typeof $function !== 'function')
-			 return this;
-		 
-		 let _arr = $array_object ;
-		 if(_arr == null )
-				_arr = this.query_result;
-			
-		
-		 if(		typeof _arr == 'Array' 
-			|| 		typeof _arr == 'array'
-			|| 		typeof _arr == 'object'
-		 ) {
-			
-			 let k = _arr.length;
-			 for(let i in _arr){
-				  
-				  if(typeof _arr[i] == 'function')
-					  continue;
-				  
-				
-				  if(typeof _arr[i] == 'number' && i === 'length' ) 
-					  continue;
-				  
-					 
-				  $function( i , _arr[i] );
-			 }
-		 }
-		 
-		 return this;
-	}
-	
-	inverseEach($array_object = null  , $function  ){
-		
-		 if(typeof $array_object === 'function'){
-			 $function = $array_object;
-			 $array_object = null ;
-		 }
-				
-		 if(typeof $function !== 'function')
-			 return this;
-		 
-		 let _arr = $array_object ;
-		 if(_arr == null )
-				_arr = this.query_result;
-			
-		
-		 if(		typeof _arr == 'Array' 
-			|| 		typeof _arr == 'array'
-			|| 		typeof _arr == 'object'
-		 ) {
-			
-			 let k = _arr.length;
-			 for(var i = k ; i >= 0  ; i--){
-				 if(typeof _arr[i] == 'function')
-					  continue;
-				  
-				
-				  if(typeof _arr[i] == 'number' && i === 'length' ) 
-					  continue;
-				  
-					 
-				  $function( i , _arr[i] );
-			 }
-		 }
-		 
-		 return this;
-	}
-	
-	
-	arrayMap($object , $function){
-		var $map = new Map($object);
-		for (var [key, value] of $map) {
-				$function( key  , value );
-		}
-		
-		return this;
-	}
-	
-	
-	children( $element ){
-		this.childs_result = this.result()[0].querySelectorAll($element);
-		return this;
-	}
-	
-	
-	all_childs( $function ){
-		
-		let __k = Array();
-		if(typeof ($function) !== 'function'){
-			
-			this.each(this.childs_result , (a,b)=>{
-				__k.push(b);
-			});
-		
-			return __k;
-		}
-		else {
-			this.each(this.childs_result , (a,b)=>{
-					$function(a,b);
-			});
-		}
-		
-		return this;
-	}
-	
-	
-	myChild( $index ){
-		 try{
-			return this.childs_result[$index] ;
-		 }catch(e){
-			 return null ;
-		 }
-	}
-	
-	
-	html ($val = 'undefined' )
-	{
+		try{
 
-		let i = 0;
-		if( (typeof $val === 'string' || typeof $val === 'number') && $val != 'undefined'){
-		
-				if(
-							this.query_result[i].innerHTML == null 
-						||  this.query_result[i].innerHTML == ''
-						||  this.query_result[i].innerHTML == 'undefined'
-				)
-					this.query_result[i].value = $val ;
-				else 
-					this.query_result[i].innerHTML = $val;
-		}	
-		else {
-			
-			if(
-						this.query_result[i].innerHTML == null 
-					||  this.query_result[i].innerHTML == ''
-					||  this.query_result[i].innerHTML == 'undefined'
-			){
-				return this.query_result[i].value;
+			 switch(typeof index){
+				 case "string":
+						for(let i in this.query_){
+							if(this.query_[i].child === index){
+								index = this.query_[i].index - 1;
+							    break;
+							}
+						}
+						break;
+				case "number":
+				case "object":
+				default :
+						if(index == 0 
+								|| index == null 
+								|| index == 'undefined'
+						   ) 
+								index = (this.cindex - 1);
+						else 
+								index = (index-1);
+						break;
+			 }
+			 
+			if(!pointer){
+				
+				if(typeof this.query_result[index] == 'undefined') 
+					return this;
+				
+				let l = this.query_result[index].length;
+				return this.query_result[index][l-1];
 			}
+					
 			else 
-				return this.query_result[i].innerHTML;
-		}
+					return this;
 			
-		return this.query_result[0];
-	
-	}
-	
-	
-	getVal(){
-		return this.html();
-	}
-	
-	setVal($val){
-		if($val == null || $val == 'IsNaN'  )
-			$val = 'undefined';
-		return this.html($val);
-	}
-	
-	append( $val  ){
-		
-		let $html = this.html();
-		if($html == '' || $html == 'undefined' || $html == null ){
-			this.html($val);
-			return this;
 		}
-		
-		this.html( $html + $val );
-		
-		return this;
-	}
-	
-	prepend( $val ){
-		let $html = this.html();
-		let i = 0 ;
-		
-		
-		if($html == '' || $html == 'undefined' || $html == null ){
-			this.html($val);
-			return this;
-		}
-		
-		if(		this.query_result[i].innerHTML == null 
-						||  this.query_result[i].innerHTML == ''
-						||  this.query_result[i].innerHTML == 'undefined'
-		   )
-		     this.query_result[i].value = $val + $html ;
-	     else 
-			 this.query_result[i].innerHTML = $val + $html;
-		 
-		 return this;
-	}
-	
-	result(){
-		return this.query_result;
-	}
-	
-	css( $name , $val  = null  ){
-		
-		if(typeof ($name) == 'string')
-			return this.setCss($name , $val );
-		
-		if(typeof ($name) !== 'object')
-			return this;
-		
-		
-		
-		for(let i in $name ){
-			this.setCss( i , $name[i] );
+		catch(e){
+			this._error_control("INTERNAL ERROR" , e);
 		}
 		
 		return this;
 		
 	}
 	
-	setCss( $name , $val   ){
-		
-		 if(typeof ($name) == 'object' )
-			  return this.css($name);
-		 
-		 let $element = this.getAttr("style");
-		 
-		 if($element == '')
-			 this.setAttr("style" , $name + ":" + $val + ";" );
-		 else{
+	find( query = ""  , rename = null  ){
+	
+	try{
+
+		 switch(typeof query ){
 			 
-			 
-			 let split = String($element).split(";");
-			 let __r   = "";
-			 let __e   = true ;
-			 
-			 for(let i in split ){
-				 
-				 switch(split[i] ){
-					 case '' :
-					 case "" :
-					 case "undefined" :
-					 case null :
-							continue;
-							break;
-				 }
-				 
-				let __p = String(split[i]).split(":");
-				if(__p.length <= 0 )
-						continue;
-				
-				if( String(__p[0]).trim() === $name.trim() ){
-					 __r += $name + ":" + $val + ";" ;
-					 __e = false;
-				}
-				else {
-					__r += split[i] + ";"
-				}
-				 
-			 }
-			 
-			 if(__e){
-				 __r += $name + ":" + $val + ";";
-			 }
-			 
-		
-			 this.setAttr("style" , __r);
+			 case null:
+			 case 'undefined':
+					break;
+			 default :
+					this._cmquery(query , rename );
+					break;
 		 }
 		 
+	}
+	catch(e){
+		this._error_control("NOT FOUND OR UNDEFINED" , e);
+	}
+		 
 		 return this;
 	}
 	
-	getId(){
-		return this.query_result[0].getAttribute("id");
-	}
-	
-	getName(){
-		return this.query_result[0].getAttribute("name");
-	}
-	
-	exist(){
-		let __q = this.query_result;
-		if(__q.length === 0 ) return false;
-		else return true ;
-	}
-	
-	getAttr($name ){
-		try{
-			return this.query_result[0].getAttribute($name);
-		}catch(e){
-			this._error_control("CRITICAL" ,e);
-			return this;
-		}
-	}
 	
 	
-	setAttr($name , $val )
-	{
-		try{
-			this.query_result[0].setAttribute($name , $val);
-		}catch(e){
-			this._error_control("CRITICAL" ,e);
-		}
+	_cmquery($query , $rename ,  type = "__NODE" ){
 		
-		return this;
-	}
+		 let error = false ;
+		 let cmd   = false ;
+		 
+		 try {
+			 
+				switch(typeof $query){
+				 
+					case 'object':
+							/***
+							
+							
+								El algoritmo debe de analizar antes el objeto que se introduce 
+								como es un objeto en si necesitamos un algoritmo de analisis nodal 
+								y verificar si ese objeto esta ya instanciado en el arreglo principal 
+								
+								si el algoritmo identifica el nodo que ya esta en uso (dentro de query_result)
+								
+								
+							***/
+							let Cn = $query.childNodes;
+							let target = -1 ;
+							let qa 	   = false ;
+							for(let j = this.cindex ; j > 0  ; j--){
+								 let s ;
+								 for(let p in  this.query_result[j]){
+									 s = this.query_result[j][p];
+									 if(s.childNodes.length == Cn.length){
+										let gh = (node1 , node2  , index)=> {
+											index++;
+											if(index > node2.length) return true;
+											if(node1[index] == node2[index]) 
+													return gh(node1 , node2 , index)
+											else return false;
+										};
+										let d = gh(s.childNodes , Cn , -1 );
+										if(d === true ){
+											target = j;
+											qa = true ;
+											break;
+										}else qa = false;
+									 }
+								 }
+								 
+								 if(qa === true ) break;
+							}
+							if(target === -1 ){
+								 this.query_result.push([$query]);
+							}
+							else {
+								 this.cindex = (target + 1);
+								 cmd = true ;
+							}
+							break;
+					case 'array' :
+							this.query_result.push($query);
+							break;
+					default : 
+							try{
+							
+								/**
+									coca es capaz de identificar nombres personalizados 
+									o id´s ya utilizados , para asi volver a reutilizar el codigo
+									y evitar una carga mas de memoria en peticion de resultados
+								**/
+								let k = this._ViewRename($query , this.cindex);
+								//coca devuelve un objeto query y target 
+								if(k.query !== null  && k.target !== 0){
+									//si existen entonces el index pasa a ser el principal 
+									cmd = true ;
+									this.cindex = k.target;
+									break;
+								}
+								
+								//m busca en el document
+								let m = document.querySelectorAll($query);
+								
+								//	si no devuelve nada posiblemente debemos de buscar en los nodos 
+								//	la onda es econtrarlo en el ultimo indexado para evitar una carga mayor 
+								if(m.length == 0 ){
+									 let u = this.query_result[this.cindex - 1].length - 1;
+									 let r = this.query_result[this.cindex - 1 ][u];
+									 this.query_result.push(r.querySelectorAll($query));
+								}else{
+									//si es un resultado del document entonces se agrega al arreglo 
+									this.query_result.push(m);
+								}
+								
+						}catch(n){
+								
+							if(typeof $query === 'string'){
+								let p = new DOMParser();
+								let r = p.parseFromString($query, "text/xml");
+								this.query_result.push(r.childNodes);
+							}
+						}
+						break;
+				 
+			 }
 	
+			
+			if(!cmd){
+				
+				if($rename !== null ){
+						for(let i in this.query_){
+								if(this.query_.child ==  $rename){
+									$rename = ($rename + String(this.cindex));
+										break;
+								}
+						}
+				}
+		
+				this._AddIndex();
 	
-	attr( $name , $val = null )
-	{
-		if(typeof ($name) == 'string')
-			return this.setAttr($name , $val );
+				this.query_.push({
+						index 	: this.cindex ,
+						query 	: $query,
+						error 	: error, 
+						child  : $rename != null ? $rename : ("?child" + this.cindex ) 
+				});
+				
+			
+			}
+				
+			
+		 }catch(e){
+			 this._error_control("NOT VALID" , e)
+			 error = true;
+		 }
+		 
+
+	
 		
-		if(typeof ($name) !== 'object')
-			return this;
 		
-		for( let i in $name  ){
-			this.setAttr( i , $name[i] );
-		}
-		
-		return this;
-		
+		return  Object.create(
+					Object.getPrototypeOf(this), 
+					Object.getOwnPropertyDescriptors(this) 
+				);
 	}
 	
 
-	existAttr( $name  )
-	{
-		let __a = this.getAttr($name);
-		if( __a == '' || __a == 'undefined' || __a == null  )
-			return false;
-		else 
-			return true;
-	}
+	_AddIndex(){ this.cindex++ ;}
 	
 
-	removeAttr($name)
-	{
-		this.query_result[0].removeAttribute($name);
-		return this;
-	}
-	
+	_ViewRename($string , index = 1){
+ 
+		
+		if(index == 0 ) return {
+			 target : 0,
+			 query  : null 
+		}
+	  
+	  
+        let p = false ;
+	    let c = String($string).localeCompare(this.query_[index - 1].query);
+		
+		if(c === 0){
+			if(String($string).substr(0,1) == "#"){
+				p = true ;
+			}
+		}
+		
+		if(	String($string).localeCompare(this.query_[index - 1].child) == 0 || p == true  ){
+			return {
+					target : this.query_[index - 1].index,
+					query  : this.query_[index -1].query
+			};
+		}
 
-	_cmquery($query ){
-		 this.query_ = $query ;
-		 this.query_result = document.querySelectorAll($query);
-		 return this;
+		else{
+			return this._ViewRename($string , (index - 1 ));
+		}
+		
+		
+		return {
+			 target : 0,
+			 query  : null 
+		}
+			
 	}
-	
 
 	
 }
+
+/***
+var xmlString = "<div id='foo'><a href='#'>Link</a><span></span></div>"
+  , parser = new DOMParser()
+  , doc = parser.parseFromString(xmlString, "text/xml");
+doc.firstChild // => <div id="foo">...
+doc.firstChild.firstChild // => <a href="#">...
+**/
 

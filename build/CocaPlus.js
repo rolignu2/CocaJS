@@ -944,11 +944,8 @@ BinaryHeap.prototype = {
 class CocaPlus extends Coco {
 	
 
-	
-	
 	   constructor(){
 		   super();
-		   
 		   
 		   this.timer = Object({
 			   
