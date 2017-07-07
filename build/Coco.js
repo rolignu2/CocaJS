@@ -202,6 +202,8 @@ class Coco extends  CocaEvents
 	}
 	
 	
+	
+	
 	/**
 		Author 		: Rolando Arriaza <rolignu90@gmail.com>
 		Functions 	: html 
@@ -247,7 +249,42 @@ class Coco extends  CocaEvents
 		return String(this.html(param));
 	}
 	
-		
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: arrayMap
+		Version 	: 0.1.1
+		Text    	: esta funcion solo manipula objetos y arreglos , no Nodelist 
+		Return 		: function / this 
+	**/
+	arrayMap($object , $function){
+		try{
+			var $map = new Map($object);
+			for (var [key, value] of $map) {
+					$function( key  , value );
+			}
+		}catch(e){
+			 this._error_control("ARRAY MAP HAS A PROBLEM WITH LOGIC ITERATION" , e);
+		}
+		return this;
+	}
+	
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: setVal 
+		Version 	: 0.1.2
+		Text    	: similar a text o html pero con un piquete condicional 
+		Return 		: this 
+	**/
+	setVal($val){
+		if($val == null || $val == 'IsNaN'  || $val == 'undefined' )
+			$val = '';
+		return this.html($val);
+	}
+	
+	
+	
 	/**
 		Author 		: Rolando Arriaza <rolignu90@gmail.com>
 		Functions 	: _cmdquery
