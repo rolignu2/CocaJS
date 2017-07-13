@@ -269,6 +269,169 @@ class Coco extends  CocaEvents
 		return this;
 	}
 	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: css
+		Version 	: 0.1.1
+		Text    	: obtiene o establece una notacion de cascada  
+		Return 		:  string / this 
+	**/
+	
+	css( $name , $val  = null  ){
+		
+		if(typeof ($name) == 'string')
+			return this.setCss($name , $val );
+		
+		if(typeof ($name) == 'object')
+			for(let i in $name ){
+				this.setCss( i , $name[i] );
+			}
+			
+		
+		return this;
+	}
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: getAttr
+		Version 	: 0.1.1
+		Text    	:  une get / set en una sola funcion ademas no se limita a crear u obtener un objeto 
+		Return 		:  mixed
+		Examples    :  
+		
+						coca.Q("#mynode").find("#testA").find("p").attr(["style" , "id"]);  -- Obtiene una lista de objetos de los atributos indicados style e id 
+						coca.Q("#mynode").find("#testA").find("p").attr("style"); 			-- obtiene un string del atributo 
+						coca.Q("#mynode").find("#testA").find("p").attr([ { style : 'color:red;'} , {  id : 'new-id'} ]);  -- establece nuevos parametros a los atributos  
+	**/
+	
+	attr( $name , $val = null , pivot = []){
+	
+		switch(typeof $name){
+			
+			case "string":
+				 if($val == null )
+						return this.getAttr($name);
+				 else 
+						this.setAttr($name , $val );
+				break;
+			case "object":
+			case "array" : 
+					for(let i in $name ){
+						if(typeof $name[i] === 'object'){
+							let l = Object.keys($name[i])[0];
+							this.setAttr(l , $name[i][l]);
+						}else if(typeof $name[i] == 'string'){
+							let n = {} ;
+							n[$name[i]] = this.attr($name[i]);
+							pivot.push(n);
+						}
+					}
+					
+					if(pivot.length !== 0) return pivot;
+				break;
+			
+		}
+		
+		return this;
+		
+	}
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: getAttr
+		Version 	: 0.1.1
+		Text    	: obtiene un atributo en especifico , ver funcion attr 
+		Return 		:  string / this [on error ]
+	**/
+	
+	getAttr($name){
+		try{
+			let l = this.query_result[this.cindex - 1 ].length - 1 ;
+			return this.query_result[this.cindex - 1 ][l].getAttribute($name);
+		}catch(e){
+			this._error_control("ERROR getAttr " ,e);
+			return this;
+		}
+	}
+	
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: setAttr
+		Version 	: 0.1.1
+		Text    	:  establece un atributo especifico en el element
+		Return 		:  this 
+	**/
+	
+	setAttr($name , $val ){
+		try{
+			let l = this.query_result[this.cindex - 1 ].length - 1 ;
+			this.query_result[this.cindex - 1 ][l].setAttribute($name , $val);
+		}catch(e){
+			this._error_control("CRITICAL" ,e);
+		}
+		return this;
+	}
+	
+	/**
+		Author 		: Rolando Arriaza <rolignu90@gmail.com>
+		Functions 	: setCss
+		Version 	: 0.1.1
+		Text    	: algoritmo de establecimiento CSS en cual crea los parametros suficientes para el ATTR
+		Return 		:  string / this 
+	**/
+	
+	setCss( $name , $val   ){
+		
+		 if(typeof ($name) == 'object' )
+			  return this.css($name);
+		  
+		 let $element = this.getAttr("style");
+		 
+		 if($element == '' || $element == null )
+			 this.setAttr("style" , $name + ":" + $val + ";" );
+		 else{
+			 
+			 let split = String($element).split(";");
+			 let __r   = "";
+			 let __e   = true ;
+			 
+			 for(let i in split ){
+				 
+				 switch(split[i] ){
+					 case '' :
+					 case "" :
+					 case "undefined" :
+					 case null :
+							continue;
+							break;
+				 }
+				 
+				let __p = String(split[i]).split(":");
+				if(__p.length <= 0 )
+						continue;
+				
+				if( String(__p[0]).trim() === $name.trim() ){
+					 __r += $name + ":" + $val + ";" ;
+					 __e = false;
+				}
+				else {
+					__r += split[i] + ";"
+				}
+				 
+			 }
+			 
+			 if(__e){
+				 __r += $name + ":" + $val + ";";
+			 }
+			 
+		
+			 this.setAttr("style" , __r);
+		 }
+		 
+		 return this;
+	}
+	
 	
 	/**
 		Author 		: Rolando Arriaza <rolignu90@gmail.com>
@@ -475,6 +638,8 @@ class Coco extends  CocaEvents
 		Text    	: incrementa el indexado del algoritmo nodal 
 	**/
 	_AddIndex(){ this.cindex++ ;}
+	
+	
 	
 	
 	
