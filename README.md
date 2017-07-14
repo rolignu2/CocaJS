@@ -22,12 +22,28 @@
   
   CocaJS trabaja en armonia con JQUERY si en dado caso desea usar en paralelo , aunque JQUERY es mas lento :D 
   
-  ## Usando Coca cuando el documento este listo 
-### VanillaJS
+  ## Como llamar a cocaJS 
+  
 ```js
 
-     
- 
+      /***
+         Palabras reservadas son coca o Coca  en dado caso no exista Jquery podemos usar $ como instancia ejemplo 
+      ****/
+      
+    
+    C(document).ready( ()=> { console.log("Coca esta listo");  }  );
+    
+    $C("div").each( (a,b)=>{ console.log( "key="  a + " value=" + b ) } )
+    
+    
+    /***  OJO !! si JQUERY no existe o no esta definido podemos usar  "$" como instancia  ***/
+    
+    
+    $(document).ready( ()=> { console.log("Coca esta listo");  }  );
+    
+    $("div").each( (a,b)=>{ console.log( "key="  a + " value=" + b ) } )
+
+    
 ```
 
 
