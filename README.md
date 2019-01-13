@@ -1,6 +1,6 @@
 # CocaJS
 
-  Version 0.1.1 (Deprecado ... ver 0.1.2)
+  Version 1.0.1
   
   [![Build Status](https://secure.travis-ci.org/mde/timezone-js.png)](https://secure.travis-ci.org/mde/timezone-js)
 
